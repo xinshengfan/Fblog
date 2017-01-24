@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 是否启用模型验证 -->
+    <mvc:annotation-driven enable-matrix-variables="false">
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="com.fblog.web.support.ServletRequestReaderArgumentsResolver"/>
+        </mvc:argument-resolvers>
+        <!--默认超时时间-->
+        <mvc:async-support default-timeout="300000"/>
+    </mvc:annotation-driven>
+
+
+    <context:component-scan base-package="com.fblog.web.backend.controller"/>
+    <context:component-scan base-package="com.fblog.web.front.controller"/>
+
+    <bean class="com.fblog.web.support.XssHandlerMappingPostProcessor"/>
+
+    <!-- 全局扫描注解类 -->
+    <context:annotation-config/>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <!--内容转让时的管理-->
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <property name="defaultContentType" value="text/html"/>
+                <!--支持扩展-->
+                <property name="favorPathExtension" value="true"/>
+                <property name="mediaTypes">
+                    <map>
+                        <entry key="html" value="text/html"/>
+                        <entry key="json" value="application/json"/>
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <!--内部的视图解析器-->
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+            </list>
+        </property>
+        <!--默认视图-->
+        <property name="defaultViews">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
+        </property>
+    </bean>
+
+    <!-- 此句用于处理/WEB-INF/下的静态资源处理 -->
+    <mvc:resources mapping="/pages/**" location="/WEB-INF/pages/"/>
+    <!-- 对于webapp子目录下与WEB-INF/目录平级的资源，下面的注解足够 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 全局异常处理 -->
+    <bean class="com.fblog.core.GlobalExceptionResolver"/>
+
+
+</beans>

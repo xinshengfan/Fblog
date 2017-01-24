@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fblog.core.dao.mapper.UserMapper">
+
+    <!--User loadByNameAndPassword(@Param("username")String username,@Param("password")String password);-->
+    <select id="loadByNameAndPassword" resultType="User">
+        SELECT *
+        FROM user
+        WHERE nickName = #{username} AND password = md5(#{password})
+    </select>
+
+    <select id="loadById" parameterType="java.lang.String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <!--<select id="list" resultType="User">-->
+        <!--SELECT * FROM user-->
+    <!--</select>-->
+
+    <select id="list" parameterType="PageModel" resultType="User">
+        SELECT *
+        FROM user
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT count(*)
+        FROM user
+    </select>
+
+    <insert id="insert" parameterType="User">
+        INSERT INTO user (id, nickName, realName, password, email, status, role, description, createTime, creator, lastUpdate)
+        VALUES
+            (#{id}, #{nickName}, #{realName}, #{password}, #{email}, #{status}, #{role}, #{description}, #{createTime},
+                    #{creator}, #{lastUpdate})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update user set realName=#{realName},email=#{email},description=#{description}
+        <if test="role!=null and role!=''">
+            ,role=#{role}
+        </if>
+        <if test="password!=null and password!=''">
+            ,password=md5(#{password})
+        </if>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

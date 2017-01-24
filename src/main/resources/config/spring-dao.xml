@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${data.pool.size.init}"/>
+        <property name="maxActive" value="${data.pool.size.max}"/>
+        <property name="minIdle" value="${data.pool.size.min}"/>
+        <property name="validationQuery" value="select 'x'"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/config/mybatis-config.xml"/>
+        <property name="typeAliasesPackage" value="com.fblog.core.dao.entity,com.fblog.service.vo"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="plugins">
+            <array>
+                <!-- 分页插件 -->
+                <bean class="com.fblog.core.plugin.PageInterceptor"/>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 动态扫描Dao接口包，动态实现Dao接口，注入到Spring容器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 需要扫描的Dao接口 -->
+        <property name="basePackage" value="com.fblog.core.dao.mapper"/>
+    </bean>
+
+    <!-- 事务管理 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 此处注意:由于lucene索引aop需要和数据库协作,
+     这里调高数据库事务优先级(保证数据库事务代码在其他需要协作的aop代码之前执行) -->
+    <tx:annotation-driven transaction-manager="txManager" order="2"/>
+
+</beans>

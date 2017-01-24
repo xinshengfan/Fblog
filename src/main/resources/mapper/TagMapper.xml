@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fblog.core.dao.mapper.TagMapper">
+
+    <select id="list" resultType="MapContainer">
+        SELECT
+            name,
+            count(*)
+        FROM tag
+        GROUP BY name
+        ORDER BY createTime DESC
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE FROM tag
+        WHERE id = #{id}
+    </delete>
+
+    <!--int insertBatch(List<Tag> list);-->
+    <insert id="insertBatch" parameterType="Tag">
+        INSERT INTO tag(id, name, postid, createTime) VALUES
+        <foreach collection="list" item="i" separator=",">
+            (#{i.id},#{i.name},#{i.postid},#{i.createTime})
+        </foreach>
+    </insert>
+    <!--int deleteByPostid(String postid);-->
+    <delete id="deleteByPostid" parameterType="java.lang.String">
+        DELETE FROM tag
+        WHERE postid = #{postid}
+    </delete>
+    <!--List<String> getTagsByPost(String postid);-->
+    <select id="getTagsByPost" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT name
+        FROM tag
+        WHERE postid = #{postid}
+    </select>
+</mapper>

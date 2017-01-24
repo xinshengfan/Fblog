@@ -1,0 +1,301 @@
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: medium none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    padding-right: 0.75em;
+}
+
+/****** 登录页面 ********/
+#login {
+    margin: 0 auto;
+    margin-top: 150px;
+    max-width: 330px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+
+#loginForm{
+    margin: 0 auto;
+    max-width: 330px;
+}
+
+#loginForm h2{
+    margin-bottom: 20px;
+}
+
+#login p {
+    padding: 12px 12px 12px 0;
+}
+.btn-margin{
+    display: inline-block;
+}
+
+#login .message {
+    background-color: #ffffe0;
+    border: 1px solid #e6db55;
+    border-radius: 3px;
+    font-size: 12px;
+    color: red;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#login #loginform {
+    background-color: #fff;
+    font-weight: normal;
+    padding: 24px;
+    box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);
+}
+
+/******** 后面编辑页面左菜单栏 side-menu ********/
+ul {
+    list-style: none outside none;
+    padding: 0;
+}
+
+.side-menu a {
+    display: block;
+}
+
+.side-menu ul a:hover {
+    background-color: #d2d2dd;
+}
+
+.side-menu ul a.last {
+    border-bottom: 1px solid #c8c8cb;
+}
+
+.side-menu i.left, .side-menu i.right {
+    display: inline-block;
+    line-height: 2.25em;
+    padding-right: 0.75em;
+}
+
+.side-menu i.right {
+    float: right;
+}
+
+.side-menu .nav-header {
+    background: rgb(239, 239, 240);
+    color: #444;
+    border-bottom: 1px solid #c8c8cb;
+    border-left: medium none;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 2.5em;
+    height: 40px;
+    margin-bottom: 0;
+    padding: 0.25em 0.25em 0.2em 1em;
+}
+
+.side-menu .sub-menu a {
+    padding: 0.5em 1em;
+    color: #222;
+    line-height: 20px;
+}
+
+/**** 后台编辑页面右侧主要内容框 *****/
+.header {
+    margin-top: 20px;
+}
+
+.databox {
+    background-color: #f5f5f5;
+    height: 80px;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.sybomol {
+    float: left;
+    height: 100%;
+    width: 45%;
+}
+
+.sybomol i {
+    margin-top: 35px;
+}
+
+.symbomol_red {
+    background-color: #f16868;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.sybomol_blue {
+    background-color: #57c8f2;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.sybomol_yellow {
+    background-color: #f8d347;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.sybomol_terques {
+    background-color: #6ccac9;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.value {
+    color: #666;
+    float: left;
+    font-size: 35px;
+    height: 100%;
+    text-align: center;
+    width: 55%;
+}
+
+.value p {
+    font-size: 14px;
+}
+
+/****** 通用form *******/
+form.text-left label {
+    font-weight: normal;
+    text-align: left;
+    padding: 7px;
+    padding-left: 40px;
+}
+
+form.text-left label i {
+    color: red;
+    padding-right: 3px;
+}
+
+form.text-left .help-block {
+    margin-bottom: 0;
+}
+
+/********* 文章编辑器  **********/
+#editor-nav li a{
+    border-bottom-width: 0;
+    font-size: 10px;
+    padding:7px 15px;
+}
+#editor-txt textarea{
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    resize: none;
+}
+
+/**********  数据table表格 **************/
+.list-table {
+    border-color: #dfdfdf;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 12px;
+}
+
+.list-table thead th:first-of-type, .list-table thead th:last-of-type {
+    border-top-left-radius: 3px;
+}
+
+.list-table a, .list-table thead tr th {
+    color: #21759b;
+}
+
+.list-table thead tr th {
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+    background: linear-gradient(to top, #ececec, #f9f9f9) repeat scroll 0 0 #f1f1f1;
+}
+
+.list-table th.center, .list-table td.center {
+    text-align: center;
+}
+
+.list-table td span.pointer {
+    cursor: pointer;
+}
+/**************** fast-edit  ************/
+#edit-row {
+    display: none;
+}
+
+#edit-row div {
+    float: left;
+    font-size: 12px;
+    padding: 0 6px;
+}
+
+#edit-row h5 {
+    margin-bottom: 0.5em;
+}
+
+#edit-row span {
+    display: block;
+    margin: 0.2em 0;
+    clear: both;
+}
+
+#edit-row span label {
+    width: 5em;
+    display: block;
+    float: left;
+    line-height: 1.8em;
+    font-weight: normal;
+}
+
+#edit-row input[type="text"], #edit-row textarea {
+    width: 83%;
+    outline: 0 none;
+    border-radius: 3px;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+}
+
+#edit-row textarea {
+    height: 4em;
+    width: 95%
+}
+
+#edit-row input[type="text"]:focus, #edit-row textarea:focus {
+    border-color: #aaa;
+}
+
+#edit-row input[type="radio"] {
+    margin-right: 0.5em;
+}
+
+.edit-col-left {
+    width: 45%;
+}
+
+.edit-col-center {
+    width: 24%;
+}
+
+#edit-row ul {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 0 5px;
+}
+
+#edit-row ul li {
+    margin: 0.2em 0;
+}
+
+.edit-col-right {
+    width: 30%;
+}
+
+#edit-row p {
+    padding: 1em 0.5em 0 0.5em;
+    clear: both;
+}

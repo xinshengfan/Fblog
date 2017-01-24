@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fblog.core.dao.mapper.PostMapper">
+
+    <insert id="insert" parameterType="Post">
+        INSERT INTO post (id, title, excerpt, content, type, parent, categoryid, pstatus, cstatus, ccount, rcount, creator, createTime, lastUpdate)
+        VALUES (#{id}, #{title}, #{excerpt}, #{content}, #{type}, #{parent}, #{categoryid}, #{pstatus}, #{cstatus},
+                       #{ccount}, #{rcount}, #{creator}, #{createTime}, #{lastUpdate})
+    </insert>
+
+    <update id="update" parameterType="Post">
+        update post set title=#{title},excerpt=#{excerpt}, content=#{content, jdbcType=CLOB},parent=#{parent},
+        pstatus=#{pstatus},
+        <if test="categoryid!=null and categoryid!=''">
+            categoryid=#{categoryid},
+        </if>
+        cstatus=#{cstatus}, lastUpdate=#{lastUpdate}
+        where id=#{id}
+    </update>
+
+    <select id="count" resultType="long">
+        SELECT count(*)
+        FROM post
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM post
+        WHERE id = #{id}
+    </delete>
+
+    <!--Post getPrevPost(String postid);-->
+    <select id="getPrevPost" parameterType="java.lang.String" resultType="Post">
+        SELECT
+            id,
+            title
+        FROM post
+        WHERE type = 'post' AND createTime > (SELECT createTime
+                                              FROM post
+                                              WHERE id = #{postid})
+        LIMIT 1
+    </select>
+    <!--Post getNextPost(String postid);-->
+    <select id="getNextPost" parameterType="java.lang.String" resultType="Post">
+        SELECT
+            id,
+            title
+        FROM post
+        WHERE type = 'post' AND createTime > (SELECT createTime
+                                              FROM post
+                                              WHERE id = #{postid}
+                                              ORDER BY createTime DESC)
+        LIMIT 1
+    </select>
+    <!--PostVO loadById(String id);-->
+    <select id="loadById" parameterType="java.lang.String" resultType="PostVO">
+        SELECT *
+        FROM post
+        WHERE id = #{id}
+    </select>
+    <select id="list" parameterType="PageModel" resultType="java.lang.String">
+        SELECT id
+        FROM post p
+        WHERE p.type = #{query.type}
+        ORDER BY p.createTime DESC
+    </select>
+    <!--List<PageVO> listPage(boolean onlyParent);-->
+    <select id="listPage" parameterType="boolean" resultType="PageVO">
+        SELECT id,title,parent FROM post WHERE type='page'
+        <if test="_parameter">AND parent='Root'</if>
+    </select>
+    <!--List<MapContainer> listArchive();-->
+    <select id="listArchive" resultType="MapContainer">
+        SELECT
+            createTime,
+            count(*) AS count
+        FROM post
+        WHERE type = 'post'
+        GROUP BY date_format(createTime, '%Y%m')
+        ORDER BY createTime DESC
+    </select>
+    <!--int addRCount(@Param("postid") String postId, @Param("count") int count);-->
+    <update id="addRCount">
+        UPDATE post
+        SET rcount = rcount + #{count}
+        WHERE id = #{postid}
+    </update>
+    <!--int addCCount(@Param("commentid") String postId, @Param("count") int count);-->
+    <update id="addCCount">
+        UPDATE post
+        SET ccount = ccount + #{count}
+        WHERE id = (SELECT postid
+                    FROM comment
+                    WHERE comment.id = #{commentid} AND status = 'approve')
+    </update>
+    <!--List<String> listRecent(@Param("nums") int nums, @Param("creator") String creator);-->
+    <select id="listRecent" resultType="java.lang.String">
+        SELECT id FROM post WHERE type='post' <if test="creator!=null and creator!='all'">AND creator=#{creator}</if> ORDER
+        BY createTime DESC LIMIT #{nums}
+    </select>
+    <!--List<String> listByMouth(PageModel<String> model);-->
+    <select id="listByMouth" parameterType="PageModel" resultType="java.lang.String">
+        SELECT id
+        FROM post
+        WHERE type = 'post' AND date_format(createTime, '%Y%M') = date_format(#{query.yearMonth}, '%Y%M')
+        ORDER BY createTime DESC
+    </select>
+    <!--List<String> listByCategory(PageModel<String> model);-->
+    <select id="listByCategory" parameterType="PageModel" resultType="java.lang.String">
+        SELECT p.id
+        FROM post p INNER JOIN category c ON p.categoryid = c.id
+        WHERE p.type = 'post' AND c.leftv >= #{query.category.leftv} AND c.rightv &lt;= #{query.category.rightv}
+        ORDER BY p.createTime DESC
+    </select>
+    <!--List<String> listByTag(PageModel<String> model);-->
+    <select id="listByTag" parameterType="PageModel" resultType="java.lang.String">
+        SELECT p.id
+        FROM tag t INNER JOIN post p ON t.postid = p.id
+        WHERE p.type = 'post' AND t.name = #{query.tagName}
+        ORDER BY p.createTime DESC
+    </select>
+    <!--void updateCategory(@Param("oldCategoryIds")List<String> oldCategoryIds,@Param("newCategoryId")String newCategoryId);-->
+    <update id="updateCategory">
+        UPDATE post SET categoryid=#{newCategoryId} WHERE categoryid IN
+        <foreach collection="oldCategoryIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>
