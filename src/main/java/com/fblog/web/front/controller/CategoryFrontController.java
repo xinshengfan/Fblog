@@ -1,6 +1,7 @@
 package com.fblog.web.front.controller;
 
 import com.fblog.biz.PostManager;
+import com.fblog.core.WebConstants;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.dao.entity.Category;
 import com.fblog.service.CategoryService;
@@ -25,6 +26,7 @@ public class CategoryFrontController {
                        @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Category category = categoryService.loadByName(name);
         if (category != null) {
+            model.addAttribute(WebConstants.PRE_TITLE_KEY,name);
             model.addAttribute("page", postManager.listByCategory(category, page, PostConstants.MAX_POST_SHOW));
         }
         model.addAttribute("category",category);

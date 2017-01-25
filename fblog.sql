@@ -34,7 +34,7 @@ CREATE TABLE `category` (
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES ('Mf2DuehP8rWqS8EzyXb', 'Root', '1', '2', '0', '2017-01-12 17:37:58');
+INSERT INTO `category` VALUES ('Mf2DuehP8rWqS8EzyXb', 'Root', '1', '2', '0', '2017-01-15 08:37:58');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -189,7 +189,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('uHHi9gvg81UXn4PLlLE', 'admin', 'fansion', 'studyHard', '937212680r@qq.com', 'N', 'admin', null, '2017-01-12 18:49:44', null, '2017-01-12 18:49:48');
+INSERT INTO `user` VALUES ('uHHi9gvg81UXn4PLlLE', 'admin', 'fansion', md5('studyHard'), '937212680r@qq.com', 'N', 'admin', null, '2017-01-12 18:49:44', null, '2017-01-12 18:49:48');
 
 -- ----------------------------
 -- View structure for `view_category`

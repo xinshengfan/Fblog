@@ -6,6 +6,10 @@
 
 <title>${g.domain} Admin</title>
 
+<link rel="icon" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
+<link rel="bookmark" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
+
 <link rel="stylesheet" href="${g.domain}/resource/bootstrap-3.3.1/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" href="${g.domain}/resource/bootstrap-3.3.1/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="${g.domain}/resource/Font-Awesome-3.2.1/css/font-awesome.min.css"/>

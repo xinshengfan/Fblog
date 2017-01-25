@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-header logo">
-                <a href="#"><img class="img-responsive" src="/resource/img/me.png"></a>
+                <a href="#"><img class="img-responsive" src="/resource/img/me.jpg"></a>
             </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -29,7 +29,7 @@
                     <span>笔记</span></a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right search_area" method="get" action="${g.domain}">
+            <form class="navbar-form navbar-right search_area" method="get" action="" onsubmit="alert('正在开发，敬请期待！');">
                 <div class="search_input">
                     <input type="text"  autocomplete="off" name="word" placeholder="搜索一下"/>
                 </div>

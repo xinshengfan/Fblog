@@ -62,7 +62,6 @@ public class PageInterceptor implements Interceptor {
         }
         //获取当前要执行的Sql语句，也就是我们直接在Mapper映射语句中写的Sql语句
         String sql = boundSql.getSql();
-        LogUtils.i("fan","执行的sql："+sql);
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

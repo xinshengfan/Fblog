@@ -4,7 +4,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
 
-<title>${g.domain} Admin</title>
+<title>${g.domain}${ptitle!=null?' | ':''}${ptitle}</title>
+
+<link rel="icon" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
+<link rel="bookmark" href="${g.domain}/resource/img/myIcon.ico" type="image/x-icon" />
 
 <link rel="stylesheet" href="${g.domain}/resource/bootstrap-3.3.1/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" href="${g.domain}/resource/bootstrap-3.3.1/css/bootstrap.min.css"/>

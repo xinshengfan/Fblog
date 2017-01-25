@@ -4,7 +4,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="header-title">
                 <div class="navbar-header logo">
-                    <a href="#"><img id="logo-icon" src="/resource/img/me.png"></a>
+                    <a href="#"><img id="logo-icon" src="/resource/img/me.jpg"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <a class="navbar-brand" target="_blank" href="${g.domain}">FBlog</a>
@@ -19,7 +19,7 @@
                         </li>
                     </ul>
                     <div id="search_area">
-                        <form method="get" action="${g.domain}">
+                        <form method="get" action="" onsubmit="alert('正在开发，敬请期待！');">
                             <div class="search_input">
                                 <input type="text" autocomplete="off" name="word" placeholder="搜索一下"/>
                             </div>

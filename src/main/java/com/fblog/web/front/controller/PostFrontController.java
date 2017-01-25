@@ -2,6 +2,7 @@ package com.fblog.web.front.controller;
 
 import com.fblog.biz.PostManager;
 import com.fblog.biz.VisitStateManager;
+import com.fblog.core.WebConstants;
 import com.fblog.service.PostService;
 import com.fblog.service.vo.PostVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class PostFrontController {
             //上一篇和下一篇
             model.addAttribute("prev",postService.getPrevPost(postid));
             model.addAttribute("next",postService.getNextPost(postid));
+            model.addAttribute(WebConstants.PRE_TITLE_KEY,postVO.getTitle());
             return "front/post";
         }else {
             model.addAttribute("msg","文章找不到了");

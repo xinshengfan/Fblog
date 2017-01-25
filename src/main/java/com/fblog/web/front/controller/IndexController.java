@@ -1,6 +1,7 @@
 package com.fblog.web.front.controller;
 
 import com.fblog.biz.PostManager;
+import com.fblog.core.WebConstants;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.utils.LogUtils;
 import com.fblog.service.vo.PostVO;
