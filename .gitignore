@@ -1,0 +1,13 @@
+*.project
+*.classpath
+.settings/
+*.swap
+target/
+*.iml
+.idea/
+.DS_Store
+HEAD
+config
+description
+hooks/
+info/
