@@ -1,14 +1,15 @@
 package com.fblog.biz;
 
+import com.fblog.biz.aop.IndexManager;
 import com.fblog.core.WebConstants;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.dao.entity.*;
-import com.fblog.core.dao.entity.PageModel;
 import com.fblog.core.utils.CollectionUtils;
 import com.fblog.core.utils.JsoupUtils;
 import com.fblog.core.utils.Utility;
 import com.fblog.service.*;
 import com.fblog.service.vo.PostVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,8 @@ public class PostManager {
     private UserService userService;
     @Autowired
     private UploadService uploadService;
+    @Autowired
+    private IndexManager postIndexManager;
 
     public PostVO loadReadById(String postId) {
         PostVO postVo = postService.loadById(postId);
@@ -162,6 +165,35 @@ public class PostManager {
         }
         model.setContent(contents);
         return model;
+    }
+
+    /**
+     * 搜索功能
+     *
+     * @param word      搜索的关键字
+     * @param pageIndex 搜索显示的第几页
+     * @return 搜索成功的文章集合
+     */
+    public PageModel<PostVO> search(String word, int pageIndex) {
+        PageModel<MapContainer> page = postIndexManager.search(word, pageIndex);
+        PageModel<PostVO> result = new PageModel<PostVO>(page.getPageIndex(), page.getPageSize());
+        result.setTotalCount(page.getTotalCount());
+        result.insertQuery("word", word);
+        List<PostVO> content = new ArrayList<>(page.getContent().size());
+    /* 填充其他属性，更好的做法是：搜索结果只包含对象id，详细资料到数据库查询(缓存) */
+        for (MapContainer mc : page.getContent()) {
+            PostVO all = loadReadById(mc.getAsString("id"));
+            PostVO copy = new PostVO();
+            // 此处需要copy，否则会影响缓存内容
+            BeanUtils.copyProperties(all, copy, new String[]{"title", "excerpt"});
+            copy.setTitle(mc.getAsString("title"));
+            copy.setExcerpt(mc.getAsString("excerpt"));
+
+            content.add(copy);
+        }
+        result.setContent(content);
+
+        return result;
     }
 
 }

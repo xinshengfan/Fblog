@@ -29,9 +29,9 @@
                     <span>笔记</span></a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right search_area" method="get" action="" onsubmit="alert('正在开发，敬请期待！');">
+            <form class="navbar-form navbar-right search_area" method="get" action="">
                 <div class="search_input">
-                    <input type="text"  autocomplete="off" name="word" placeholder="搜索一下"/>
+                    <input type="text" autocomplete="off" name="word" placeholder="搜索一下" value="${search}"/>
                 </div>
                 <div class="search_button">
                     <input type="submit" value=""/>

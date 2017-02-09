@@ -32,8 +32,8 @@ public class Global {
     }
 
     public String getDescription() {
-//        return getOptionValue(OptionConstants.DESCRIPTION);
-        return "默认描述，后需从数据库查询";
+        return getOptionValue(OptionConstants.DESCRIPTION);
+//        return "默认描述，后需从数据库查询";
     }
 
 

@@ -43,7 +43,7 @@ public class PageModel<T> {
      * 这里在mapper.xml使用query.key来引用放入的的value
      * 注意要放入时的key与mapper.xml引用的key对应上
      */
-    public PageModel<T> intsertQuery(String key, Object value) {
+    public PageModel<T> insertQuery(String key, Object value) {
         query.put(key, value);
         return this;
     }

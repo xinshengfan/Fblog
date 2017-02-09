@@ -35,7 +35,7 @@
             id,
             title
         FROM post
-        WHERE type = 'post' AND createTime > (SELECT createTime
+        WHERE type = 'post' AND createTime &lt; (SELECT createTime
                                               FROM post
                                               WHERE id = #{postid})
         LIMIT 1

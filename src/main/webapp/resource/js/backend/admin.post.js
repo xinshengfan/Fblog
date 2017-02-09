@@ -185,4 +185,8 @@ fblog.post.submitfast = function () {
     });
 }
 
+fblog.post.edit = function (postid) {
+    window.location.href = fblog.getDomain("posts/edit?pid=" + postid);
+}
+
 

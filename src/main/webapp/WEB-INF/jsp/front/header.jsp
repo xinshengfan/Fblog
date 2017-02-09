@@ -19,7 +19,7 @@
                         </li>
                     </ul>
                     <div id="search_area">
-                        <form method="get" action="" onsubmit="alert('正在开发，敬请期待！');">
+                        <form method="get" action="${g.domain}">
                             <div class="search_input">
                                 <input type="text" autocomplete="off" name="word" placeholder="搜索一下"/>
                             </div>

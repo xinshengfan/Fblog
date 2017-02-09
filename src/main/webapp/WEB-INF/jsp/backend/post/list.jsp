@@ -43,10 +43,10 @@
                                     <span class="hide"><i class="post-ps">${post.pstatus}</i>
                           <i class="post-cs">${post.cstatus}</i><i class="post-tags">${z:join(post.tags,',')}</i></span>
                                     <div class="row-action">
-                                        <span><a href="#">编辑</a>&nbsp;|&nbsp;</span>
+                                        <span><a href="#" onclick="fblog.post.edit('${post.id}')">编辑</a>&nbsp;|&nbsp;</span>
                                         <span><a href="#" onclick="fblog.post.fastedit('${post.id}')">快速编辑</a>&nbsp;|&nbsp;</span>
                                         <span><a href="#" onclick="fblog.post.remove('${post.id}')">移到回收站</a>&nbsp;|&nbsp;</span>
-                                        <span><a target="_blank" href="${g.domain}/pages/${post.id}">查看</a></span>
+                                        <span><a target="_blank" href="${g.domain}/post/${post.id}">查看</a></span>
                                     </div>
                                 </td>
                                 <td class="post-author">${post.user.nickName}</td>

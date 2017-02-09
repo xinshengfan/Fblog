@@ -32,4 +32,6 @@ public class PostConstants {
      * 最多显示文章篇数
      */
     public static final int MAX_POST_SHOW = 10;
+
+    public static final int MAX_TITLE_LENGTH = 100-3;
 }

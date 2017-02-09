@@ -2,16 +2,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 定义事务中的切面 -->
 
     <context:component-scan base-package="com.fblog.biz"/>
 
-    <!--<aop:config proxy-target-class="true">-->
-        <!--<aop:pointcut id="p-post-insert" expression="execution(* com.fblog.biz.PostManager.insertPost(..)) and args(post,..)"/>-->
-        <!--<aop:pointcut id="p-post-update" expression="execution(* com.fblog.biz.PostManager.updatePost(..)) and args(post,..)"/>-->
-        <!--<aop:pointcut id="p-post-remove" expression="execution(* com.fblog.biz.PostManager.deletePost(..)) and args(post,..)"/>-->
-        <!---->
-    <!--</aop:config>-->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="p-post-insert"
+                      expression="execution(* com.fblog.biz.PostManager.insertPost(..)) and args(post,..)"/>
+        <aop:pointcut id="p-post-update"
+                      expression="execution(* com.fblog.biz.PostManager.updatePost(..)) and args(post,..)"/>
+        <aop:pointcut id="p-post-remove"
+                      expression="execution(* com.fblog.biz.PostManager.deletePost(String,String)) and args(postId,postType)"/>
+
+        <aop:aspect ref="indexManager">
+            <!--在文章数据库完成后，切入执行Lucene的相关操作-->
+            <aop:after-returning method="insert" pointcut-ref="p-post-insert" arg-names="post"/>
+            <aop:after-returning method="update" pointcut-ref="p-post-update" arg-names="post,affect"
+                                 returning="affect"/>
+            <aop:after-returning method="remove" pointcut-ref="p-post-remove" arg-names="postId,postType"/>
+        </aop:aspect>
+    </aop:config>
+
 
 </beans>

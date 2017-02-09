@@ -55,7 +55,7 @@ public class PostService extends BaseService {
      */
     public PageModel<String> listPost(int pageIndex, int pageSize) {
         PageModel<String> page = new PageModel<String>(pageIndex, pageSize);
-        page.intsertQuery("type", PostConstants.TYPE_POST);
+        page.insertQuery("type", PostConstants.TYPE_POST);
         super.list(page);
         //page是已经在super中完成查询，包含所有文章id的一个id list
             /* 由于分页标签会根据query产生,这里删除掉无用query,下同 */
@@ -65,7 +65,7 @@ public class PostService extends BaseService {
 
     public PageModel<String> listByCategory(Category category, int pageIndex, int pageSize) {
         PageModel<String> model = new PageModel<String>(pageIndex, pageSize);
-        model.intsertQuery("category", category);
+        model.insertQuery("category", category);
         List<String> content = postMapper.listByCategory(model);
         //未使用super，需手动处理
         model.setContent(content);
@@ -75,7 +75,7 @@ public class PostService extends BaseService {
 
     public PageModel<String> listByTag(String tagName, int pageIndex, int pageSize) {
         PageModel<String> model = new PageModel<String>(pageIndex, pageSize);
-        model.intsertQuery("tagName", tagName);
+        model.insertQuery("tagName", tagName);
         List<String> content = postMapper.listByTag(model);
         model.setContent(content);
         model.removeQuery("tagName");
@@ -84,7 +84,7 @@ public class PostService extends BaseService {
 
     public PageModel<String> listByMonth(Date yearMonth, int pageIndex, int pageSize) {
         PageModel<String> model = new PageModel<String>(pageIndex, pageSize);
-        model.intsertQuery("yearMonth", yearMonth);
+        model.insertQuery("yearMonth", yearMonth);
         List<String> content = postMapper.listByMouth(model);
         model.setContent(content);
         model.removeQuery("yearMonth");
@@ -94,7 +94,7 @@ public class PostService extends BaseService {
     public List<String> listBySiteMap() {
         //查询所有
         PageModel<String> model = new PageModel<String>(1, -1);
-        model.intsertQuery("type", PostConstants.TYPE_POST);
+        model.insertQuery("type", PostConstants.TYPE_POST);
         super.list(model);
         model.removeQuery("type");
         return model.getContent();
@@ -102,7 +102,7 @@ public class PostService extends BaseService {
 
     public PageModel<String> listPage(int pageIndex, int pageSize) {
         PageModel<String> model = new PageModel<String>(pageIndex, pageSize);
-        model.intsertQuery("type", PostConstants.TYPE_PAGE);
+        model.insertQuery("type", PostConstants.TYPE_PAGE);
         super.list(model);
         model.removeQuery("type");
         return model;

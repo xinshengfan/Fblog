@@ -32,8 +32,25 @@ a, a:hover, a:focus {
     background-color: #333;
 }
 
+.post_pre {
+    width: 100%;
+}
+
+.post_pre img{
+    width: 18px;
+    margin-right: 5px;
+}
+
+.post_pre a,
+.post_pre li{
+    height: 28px;
+    line-height: 28px;
+}
+
 .menus span,
 .menus img,
+.post_pre span,
+.post_pre img,
 .blog-stat span,
 .blog-stat img {
     vertical-align: middle;
@@ -47,17 +64,19 @@ a, a:hover, a:focus {
     line-height: 50px;
 }
 
-.menus a,.menus a:hover,.menus a:focus{
+.post_pre a, .post_pre a:hover, .post_pre a:focus
+.menus a, .menus a:hover, .menus a:focus {
     text-decoration: none;
     outline: medium none;
 }
 
-.menus a{
+.post_pre.a,
+.menus a {
     color: #6d7478;
 }
 
-
-#navbar a:hover,#navbar a:focus{
+.post_pre a:hover,.post_pre a:focus,
+#navbar a:hover, #navbar a:focus {
     color: black;
     background-color: transparent;
 }
@@ -325,6 +344,11 @@ a, a:hover, a:focus {
     line-height: 28px
 }
 
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+}
+
 .blog-concise-box .blog-operate {
     position: absolute;
     right: 5px;
@@ -337,7 +361,7 @@ a, a:hover, a:focus {
 }
 
 .blog-concise-box .blog-stat {
-    padding-top: 20px;
+    padding-top: 15px;
     font-size: 14px;
     color: #999
 }
@@ -467,7 +491,7 @@ a, a:hover, a:focus {
     bottom: 0;
 }
 
-.post_bottom{
+.post_bottom {
     width: 100%;
     border-top: 1px solid #dbdde4;
     background: #fff;
@@ -482,7 +506,7 @@ a, a:hover, a:focus {
     color: #999;
 }
 
-#my_msg span{
+#my_msg span {
     float: right;
     font-size: 13px;
     margin-right: 15px;

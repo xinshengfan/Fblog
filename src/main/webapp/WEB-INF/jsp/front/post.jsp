@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="page" uri="/WEB-INF/tld/pagination.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE Html>
 <html>
 <head>
@@ -28,6 +28,23 @@
                     <div class="ellipsis-text blog-content mui-ellipsis-3">
                         ${post.content}
                     </div>
+
+                    <c:if test="${prev!=null || next!=null}">
+                        <ul class="post_pre list-unstyled">
+                            <c:if test="${prev!=null}">
+                                <li><a href="${g.domain}/post/${prev.id}"><img
+                                        src="/resource/img/up1.svg"><span>${prev.title}</span></a>
+                                </li>
+                            </c:if>
+                            <c:if test="${next!=null}">
+                                <li><a href="${g.domain}/post/${next.id}">
+                                    <img
+                                            src="/resource/img/down1.svg"><span>${next.title}</span></a>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </c:if>
+
                     <div class="blog-stat">
                         <a href="#"><img class="icon-category"
                                          src="/resource/img/read.svg"><span>${post.rcount}</span></a>

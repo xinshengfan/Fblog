@@ -2,6 +2,7 @@ package com.fblog.web.backend.controller;
 
 import com.fblog.biz.OptionManager;
 import com.fblog.biz.PostManager;
+import com.fblog.biz.aop.IndexManager;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.dao.entity.MapContainer;
 import com.fblog.core.dao.entity.PageModel;
@@ -37,6 +38,22 @@ public class PostController {
     private CategoryService categoryService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private IndexManager indexManager;
+
+    /**
+     * 在添加Lucene搜索功能后，对原先数据库中已的插入的数据建立索引
+     */
+    @RequestMapping(value = "/updateLucene", method = RequestMethod.GET)
+    public String updateLucene(Model model) {
+        PageModel<PostVO> pageModel = postManager.listPost(1, 100);
+        for (Post post : pageModel.getContent()) {
+            indexManager.remove(post.getId(),PostConstants.TYPE_POST);
+            indexManager.insert(post);
+        }
+        model.addAttribute("msg", "更新Lucene索引成功：" + pageModel.getContent().size());
+        return "error";
+    }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(String pid, Model model) {
@@ -75,11 +92,13 @@ public class PostController {
         post.setCreator(WebContextFactory.get().getUser().getId());
         post.setCreateTime(new Date());
         post.setLastUpdate(post.getCreateTime());
+        String title = post.getTitle();
+        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) : title;
+        post.setTitle(title + "…");
 
         postManager.insertPost(post, PostTagUtils.from(post, tags, post.getCreator()));
         return new MapContainer("success", true);
     }
-
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.PUT)
@@ -99,6 +118,9 @@ public class PostController {
 
         post.setType(PostConstants.TYPE_POST);
         post.setLastUpdate(new Date());
+        String title = post.getTitle();
+        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) : title;
+        post.setTitle(title + "…");
         postManager.updatePost(post, PostTagUtils.from(post, tags, WebContextFactory.get().getUser().getId()));
         return new MapContainer("success", true);
     }
