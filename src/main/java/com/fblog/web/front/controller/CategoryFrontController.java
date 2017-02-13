@@ -30,6 +30,6 @@ public class CategoryFrontController {
             model.addAttribute("page", postManager.listByCategory(category, page, PostConstants.MAX_POST_SHOW));
         }
         model.addAttribute("category",category);
-        return "index";
+        return "front/home";
     }
 }

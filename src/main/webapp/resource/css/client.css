@@ -36,13 +36,24 @@ a, a:hover, a:focus {
     width: 100%;
 }
 
-.post_pre img{
+.post_pre img {
     width: 18px;
     margin-right: 5px;
 }
 
+#empty{
+    width: 100%;
+    background-color: white;
+}
+
+#empty img{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
 .post_pre a,
-.post_pre li{
+.post_pre li {
     height: 28px;
     line-height: 28px;
 }
@@ -75,7 +86,7 @@ a, a:hover, a:focus {
     color: #6d7478;
 }
 
-.post_pre a:hover,.post_pre a:focus,
+.post_pre a:hover, .post_pre a:focus,
 #navbar a:hover, #navbar a:focus {
     color: black;
     background-color: transparent;
@@ -344,9 +355,34 @@ a, a:hover, a:focus {
     line-height: 28px
 }
 
+.mui-ellipsis-3 {
+    word-break: break-all;
+    overflow: auto;
+    white-space: normal;
+}
+
 .blog-content img {
     max-width: 100%;
     height: auto;
+}
+
+.blog-content table{
+    max-width: 100%;
+    width: 100% !important;
+    table-layout: fixed;
+    white-space: nowrap;
+    height: auto;
+}
+
+.blog-content table td{
+    white-space: nowrap;
+    width:inherit !important;
+    align:left;
+    word-wrap:break-word;
+}
+
+.blog-content table td p{
+    word-break: break-all;
 }
 
 .blog-concise-box .blog-operate {
@@ -495,8 +531,10 @@ a, a:hover, a:focus {
     width: 100%;
     border-top: 1px solid #dbdde4;
     background: #fff;
-    padding-top: 10px;
-    padding-bottom: 8px;
+}
+
+#my_msg{
+    margin: 10px 0;
 }
 
 #copyright {

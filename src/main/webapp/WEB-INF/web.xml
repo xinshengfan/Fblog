@@ -13,16 +13,16 @@
 
     <!-- jsp的全局配置 -->
     <!--<jsp-config>-->
-        <!--<jsp-property-group>-->
-            <!--<url-pattern>*.html</url-pattern>-->
-            <!--<el-ignored>true</el-ignored>-->
-            <!--<page-encoding>UTF-8</page-encoding>-->
-        <!--</jsp-property-group>-->
-        <!-- 去掉jsp指令/jstl标签造成的空白行 -->
-        <!--<jsp-property-group>-->
-            <!--<url-pattern>*.jsp</url-pattern>-->
-            <!--<trim-directive-whitespaces>true</trim-directive-whitespaces>-->
-        <!--</jsp-property-group>-->
+    <!--<jsp-property-group>-->
+    <!--<url-pattern>*.html</url-pattern>-->
+    <!--<el-ignored>true</el-ignored>-->
+    <!--<page-encoding>UTF-8</page-encoding>-->
+    <!--</jsp-property-group>-->
+    <!-- 去掉jsp指令/jstl标签造成的空白行 -->
+    <!--<jsp-property-group>-->
+    <!--<url-pattern>*.jsp</url-pattern>-->
+    <!--<trim-directive-whitespaces>true</trim-directive-whitespaces>-->
+    <!--</jsp-property-group>-->
     <!--</jsp-config>-->
 
     <!-- 监听器 -->
@@ -108,14 +108,19 @@
     </filter-mapping>
 
     <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>/resource/*</url-pattern>-->
+    <!--<servlet-name>default</servlet-name>-->
+    <!--<url-pattern>/resource/*</url-pattern>-->
     <!--</servlet-mapping>-->
 
     <servlet-mapping>
         <servlet-name>fBlogDispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/resource/error/404.html</location>
+    </error-page>
 
     <!-- 缺省首页 -->
     <welcome-file-list>

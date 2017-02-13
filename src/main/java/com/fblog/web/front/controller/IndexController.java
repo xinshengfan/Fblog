@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 首页
@@ -20,7 +22,12 @@ public class IndexController {
     private PostManager postManager;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(@RequestParam(value = "page", defaultValue = "1") int page, String word, Model model) {
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home(@RequestParam(value = "page", defaultValue = "1") int page, String word, Model model) {
         if (StringUtils.isEmpty(word)) {
             model.addAttribute("page", postManager.listPost(page, PostConstants.MAX_POST_SHOW));
         } else {
@@ -30,7 +37,7 @@ public class IndexController {
             model.addAttribute("search", word);
             model.addAttribute(WebConstants.PRE_TITLE_KEY, word);
         }
-        return "index";
+        return "front/home";
     }
 
 }

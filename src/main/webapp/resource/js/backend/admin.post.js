@@ -84,9 +84,7 @@ fblog.post.insert = function () {
         success: function (data) {
             if (data && data.success) {
                 window.location.href = ".";
-                console.log("********* 上传文章成功 ********* " + window.location.href);
             } else {
-                console.log("********* 上传文章失败 ********* " + data);
                 alert(data.msg);
             }
         }

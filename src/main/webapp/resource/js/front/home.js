@@ -1,19 +1,40 @@
-fblog.register("fblog.home");
+fblog.register("fblog.front");
 
-$(function (category) {
-    $(".blog-category img").setAttribute("src",fblog.home.getImg(category));
+$(function () {
+    $('#empty').css('height',$(window).height()-180);
+    $('#empty img').css('padding-top',20);
+    $.ajax({
+        url: fblog.domain("/home"),
+        type: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            $('#empty').hide();
+            $('#blogApp').html(data);
+        },
+        complete: function () {
+            $("#pload").remove();
+        }
+    });
 });
 
-fblog.home.getImg = function (category) {
-    switch (category) {
-        case "android":
-            return "/resource/img/android.svg";
-        case "ios":
-            return "/resource/img/ios.svg";
-        case "web":
-            return "/resource/img/web.svg";
-        case "note":
-            return "/resource/img/note.svg";
-    }
-}
+fblog.front.search = function () {
+    fblog.front.replaceContent("/home?word=" + $('#search_word').val());
+};
 
+fblog.front.replaceContent = function (url) {
+    $.ajax({
+        url: fblog.domain(url),
+        type: 'GET',
+        dataType: 'html',
+        beforeSend: function () {
+            $("body").append('<div id="pload" style="position:fixed;top:70px;z-index:1200;' +
+                'background:url(/resource/img/reload.svg) top center no-repeat;width:100%;height:50px;margin:auto auto;"></div>');
+        },
+        success: function (data) {
+            $('#blogApp').html(data);
+        },
+        complete: function () {
+            $("#pload").remove();
+        }
+    });
+};
