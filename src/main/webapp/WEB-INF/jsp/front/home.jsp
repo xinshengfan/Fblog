@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="main-container">
+    <span id="post_title" hidden="hidden">FBlog${ptitle!=null?' | ':''}${ptitle}</span>
     <c:if test="${page.content.size()==0}">
         <section class="blog-box-container">
             <div class="blog-concise-box">
@@ -27,7 +28,8 @@
 
             <div class="blog-concise-box">
                 <div class="blog-concise">
-                    <div class="blog-title"><a href="#" onclick="fblog.front.replaceContent('/post/${post.id}')">${post.title}</a></div>
+                    <div class="blog-title"><a
+                            onclick="fblog.front.replaceContent('/post/${post.id}')">${post.title}</a></div>
                     <div class="ellipsis-text blog-content mui-ellipsis-3">
                             ${post.excerpt}
                     </div>
@@ -44,7 +46,7 @@
             <ul class="paging pagination">
                 <page:page model="${page}" pageUrl="${request.requestURL}" showPage="9" boundary="2">
                     <page:prev>
-                        <li><a href="#" onclick="fblog.front.replaceContent('/home${pageUrl}')"><<</a></li>
+                        <li><a onclick="fblog.front.replaceContent('/home${pageUrl}')"><<</a></li>
                     </page:prev>
                     <page:pager>
                         <c:choose>
@@ -55,12 +57,12 @@
                                 <li class="active"><a href="javascript:void(0);">${pageNumber}</a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="#" onclick="fblog.front.replaceContent('/home${pageUrl}')">${pageNumber}</a></li>
+                                <li><a onclick="fblog.front.replaceContent('/home${pageUrl}')">${pageNumber}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </page:pager>
                     <page:next>
-                        <li><a href="#" onclick="fblog.front.replaceContent('/home${pageUrl}')">>></a></li>
+                        <li><a onclick="fblog.front.replaceContent('/home${pageUrl}')">>></a></li>
                     </page:next>
                 </page:page>
             </ul>

@@ -1,14 +1,11 @@
 package com.fblog.biz;
 
 import com.fblog.core.WebConstants;
+import com.fblog.core.dao.entity.PageModel;
 import com.fblog.core.dao.entity.Post;
 import com.fblog.core.dao.entity.Upload;
 import com.fblog.core.dao.entity.User;
-import com.fblog.core.dao.entity.PageModel;
-import com.fblog.core.utils.DateUtils;
-import com.fblog.core.utils.FileUtils;
-import com.fblog.core.utils.IDGenerator;
-import com.fblog.core.utils.StringUtils;
+import com.fblog.core.utils.*;
 import com.fblog.service.PostService;
 import com.fblog.service.UploadService;
 import com.fblog.service.UserService;
@@ -28,6 +25,7 @@ import java.util.Date;
  */
 @Component
 public class UploadManager {
+    private static final String TAG = "UploadManager";
     @Autowired
     private UploadService uploadService;
     @Autowired
@@ -36,10 +34,10 @@ public class UploadManager {
     private UserService userService;
 
 
-    public PageModel<UploadVO> list(int pageIndex, int pageSize){
+    public PageModel<UploadVO> list(int pageIndex, int pageSize) {
         PageModel<UploadVO> result = uploadService.list(pageIndex, pageSize);
-        for(UploadVO upload : result.getContent()){
-            if(!StringUtils.isEmpty(upload.getPostid())){
+        for (UploadVO upload : result.getContent()) {
+            if (!StringUtils.isEmpty(upload.getPostid())) {
                 Post post = postService.loadById(upload.getPostid());
                 upload.setPost(post);
             }
@@ -59,13 +57,13 @@ public class UploadManager {
      * @param userid
      * @return 当前上传对象
      */
-    public Upload insertUpload(Resource resource, Date create, String fileName, String userid){
+    public Upload insertUpload(Resource resource, Date create, String fileName, String userid) {
         Upload upload = null;
         OutputStream out = null;
-        try{
+        try {
             String yearMonth = DateUtils.formatDate("yyyy/MM", create);
-            File parent = new File(WebConstants.APPLICATION_PATH + "/post/uploads", yearMonth);
-            if(!parent.exists())
+            File parent = new File(WebConstants.FILE_PATH + "/post/uploads", yearMonth);
+            if (!parent.exists())
                 parent.mkdirs();
 
             File savePath = FileUtils.determainFile(parent, fileName);
@@ -79,10 +77,11 @@ public class UploadManager {
             upload.setPath("/post/uploads/" + yearMonth + "/" + savePath.getName());
 
             uploadService.insert(upload);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+            LogUtils.e(TAG, "got exception when insert file:" + e);
             upload = null;
-        }finally{
+        } finally {
             IOUtils.closeQuietly(out);
         }
 
@@ -94,16 +93,16 @@ public class UploadManager {
      *
      * @param uploadid
      */
-    public void removeUpload(String uploadid){
+    public void removeUpload(String uploadid) {
         Upload upload = uploadService.loadById(uploadid);
         uploadService.deleteById(uploadid);
         File file = new File(WebConstants.APPLICATION_PATH, upload.getPath());
-        if(file.exists())
+        if (file.exists())
             file.delete();
 
     /* 注:当前目录为空同时删除父目录,如果父目录包含子文件/夹，会删除失败(File.delete中决定) */
         File parent = file.getParentFile();
-        for(int i = 0; i < 2 && parent.list().length == 0; i++){
+        for (int i = 0; i < 2 && parent.list().length == 0; i++) {
             parent.delete();
             parent = parent.getParentFile();
         }

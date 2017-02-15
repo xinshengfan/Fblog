@@ -23,6 +23,6 @@ fblog.getDomain = function (path) {
     return window.location.protocol + "//" + window.location.host + "/backend/" + path;
 }
 
-fblog.domain = function (path) {
+fblog.getWebDomain = function (path) {
     return window.location.protocol + "//" + window.location.host + path;
 }

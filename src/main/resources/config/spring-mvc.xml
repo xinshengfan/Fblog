@@ -66,6 +66,8 @@
 
     <!-- 此句用于处理/WEB-INF/下的静态资源处理 -->
     <mvc:resources mapping="/pages/**" location="/WEB-INF/pages/"/>
+    <!-- 处理独立的资源目录虚拟路径映射 -->
+    <mvc:resources mapping="/post/uploads/**" location="file:///fBlog_file/post/uploads/"/>
     <!-- 对于webapp子目录下与WEB-INF/目录平级的资源，下面的注解足够 -->
     <mvc:default-servlet-handler/>
 

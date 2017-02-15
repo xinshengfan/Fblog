@@ -183,6 +183,9 @@ public class PostManager {
     /* 填充其他属性，更好的做法是：搜索结果只包含对象id，详细资料到数据库查询(缓存) */
         for (MapContainer mc : page.getContent()) {
             PostVO all = loadReadById(mc.getAsString("id"));
+            if (all == null) {
+                continue;
+            }
             PostVO copy = new PostVO();
             // 此处需要copy，否则会影响缓存内容
             BeanUtils.copyProperties(all, copy, new String[]{"title", "excerpt"});

@@ -22,6 +22,8 @@ public class WebConstants {
     /*域名*/
     private static String DOMAIN;
 
+    public static final String FILE_PATH = "/fBlog_file";
+
     public static String getDomain() {
         return DOMAIN;
     }

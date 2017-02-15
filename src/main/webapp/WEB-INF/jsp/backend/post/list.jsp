@@ -37,7 +37,7 @@
                         <c:forEach items="${page.content}" var="post">
                             <tr id="edit-${post.id}">
                                 <td><strong><a class="post-title" target="_blank"
-                                               href="../../post/${post.id}">${post.title}</a>
+                                               href="${g.domain}#/post/${post.id}">${post.title}</a>
                                     <c:if test="${post.pstatus=='secret'}"> - 私密</c:if>
                                 </strong>
                                     <span class="hide"><i class="post-ps">${post.pstatus}</i>
@@ -46,7 +46,7 @@
                                         <span><a href="#" onclick="fblog.post.edit('${post.id}')">编辑</a>&nbsp;|&nbsp;</span>
                                         <span><a href="#" onclick="fblog.post.fastedit('${post.id}')">快速编辑</a>&nbsp;|&nbsp;</span>
                                         <span><a href="#" onclick="fblog.post.remove('${post.id}')">移到回收站</a>&nbsp;|&nbsp;</span>
-                                        <span><a target="_blank" href="${g.domain}/post/${post.id}">查看</a></span>
+                                        <span><a target="_blank" href="${g.domain}#/post/${post.id}">查看</a></span>
                                     </div>
                                 </td>
                                 <td class="post-author">${post.user.nickName}</td>

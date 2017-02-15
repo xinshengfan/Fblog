@@ -1,10 +1,17 @@
 fblog.register("fblog.front");
 
 $(function () {
-    $('#empty').css('height',$(window).height()-180);
-    $('#empty img').css('padding-top',20);
+    $('#empty').css('height', $(window).height() - 180);
+    $('#empty img').css('padding-top', 20);
+    //.collapse需要先激活
+    $("#navbar").collapse({toggle: false});
+    // $(window).bind('hashchange', function () {
+    //     alert(window.location.href + "<br>" + fblog.front.urlHash);
+    // });
+    var url = location.hash;
+    url = url.length == 0 ? "/home" : url.substring(1);
     $.ajax({
-        url: fblog.domain("/home"),
+        url: fblog.getWebDomain(url),
         type: 'GET',
         dataType: 'html',
         success: function (data) {
@@ -22,8 +29,9 @@ fblog.front.search = function () {
 };
 
 fblog.front.replaceContent = function (url) {
+    location.hash = "#" + url;
     $.ajax({
-        url: fblog.domain(url),
+        url: fblog.getWebDomain(url),
         type: 'GET',
         dataType: 'html',
         beforeSend: function () {
@@ -32,9 +40,14 @@ fblog.front.replaceContent = function (url) {
         },
         success: function (data) {
             $('#blogApp').html(data);
+            $(document).attr("title", $("#post_title").html());
         },
         complete: function () {
             $("#pload").remove();
+            //合上菜单栏
+            $("#navbar").collapse('hide');
+            //滚动到顶部
+            $('body,html').animate({scrollTop: 0}, 800);
         }
     });
 };

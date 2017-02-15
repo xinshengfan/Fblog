@@ -15,6 +15,6 @@
 <jsp:include page="front/bottom.jsp"/>
 <jsp:include page="front/footer.jsp"/>
 
-<script src="${g.domain}/resource/js/front/home.js" type="text/javascript"></script>
+<script src="${g.domain}/resource/js/front/home_v1.2.js" type="text/javascript"></script>
 </body>
 </html>

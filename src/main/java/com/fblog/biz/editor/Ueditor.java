@@ -4,6 +4,7 @@ import com.fblog.biz.UploadManager;
 import com.fblog.core.WebConstants;
 import com.fblog.core.dao.entity.Upload;
 import com.fblog.core.dao.entity.MapContainer;
+import com.fblog.core.utils.LogUtils;
 import com.fblog.web.support.ServletRequestReader;
 import com.fblog.web.support.WebContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,7 @@ public class Ueditor {
             upload = uploadManager.insertUpload(new InputStreamResource(in), new Date(), file.getOriginalFilename(),
                     WebContextFactory.get().getUser().getId());
         }catch(Exception e){
+            LogUtils.e("Ueditor","got exception when uploadImage:"+e);
             e.printStackTrace();
             upload = null;
         }
