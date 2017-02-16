@@ -9,7 +9,7 @@
 <div id="blogApp" class="container-fluid">
     <%-- main --%>
     <div id="empty">
-        <img src="${g.domain}/resource/img/loading0.gif">
+        <img src="${g.domain}/resource/img/loading.svg">
     </div>
 </div>
 <jsp:include page="front/bottom.jsp"/>

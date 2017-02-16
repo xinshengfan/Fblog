@@ -1,13 +1,21 @@
 fblog.register("fblog.front");
 
 $(function () {
-    $('#empty').css('height', $(window).height() - 180);
-    $('#empty img').css('padding-top', 20);
+    var emptyH = $(window).height() - 120;
+    $('#empty').css('height', emptyH);
+    $('#empty img').css('padding-top', emptyH / 3);
     //.collapse需要先激活
     $("#navbar").collapse({toggle: false});
-    // $(window).bind('hashchange', function () {
-    //     alert(window.location.href + "<br>" + fblog.front.urlHash);
-    // });
+    $(window).bind('hashchange', function () {
+        // alert(window.location.href + "  hash:" + location.hash);
+        if (location.hash.length == 0) {
+            fblog.front.replaceContent("/home");
+        }
+    });
+    loadHome();
+});
+
+loadHome = function () {
     var url = location.hash;
     url = url.length == 0 ? "/home" : url.substring(1);
     $.ajax({
@@ -22,14 +30,16 @@ $(function () {
             $("#pload").remove();
         }
     });
-});
+}
 
 fblog.front.search = function () {
     fblog.front.replaceContent("/home?word=" + $('#search_word').val());
 };
 
 fblog.front.replaceContent = function (url) {
-    location.hash = "#" + url;
+    if (url != "/home") {
+        location.hash = "#" + url;
+    }
     $.ajax({
         url: fblog.getWebDomain(url),
         type: 'GET',
