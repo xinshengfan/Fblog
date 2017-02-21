@@ -93,8 +93,8 @@ public class PostController {
         post.setCreateTime(new Date());
         post.setLastUpdate(post.getCreateTime());
         String title = post.getTitle();
-        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) : title;
-        post.setTitle(title + "…");
+        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) + "…": title;
+        post.setTitle(title);
 
         postManager.insertPost(post, PostTagUtils.from(post, tags, post.getCreator()));
         return new MapContainer("success", true);
@@ -119,8 +119,8 @@ public class PostController {
         post.setType(PostConstants.TYPE_POST);
         post.setLastUpdate(new Date());
         String title = post.getTitle();
-        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) : title;
-        post.setTitle(title + "…");
+        title = title.length() > PostConstants.MAX_TITLE_LENGTH ? title.substring(0, PostConstants.MAX_TITLE_LENGTH) + "…": title;
+        post.setTitle(title);
         postManager.updatePost(post, PostTagUtils.from(post, tags, WebContextFactory.get().getUser().getId()));
         return new MapContainer("success", true);
     }

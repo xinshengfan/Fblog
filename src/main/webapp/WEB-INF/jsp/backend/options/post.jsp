@@ -23,13 +23,13 @@
                     <c:if test="${success}">
                         <div class="alert alert-success" style="padding: 10px 15px">修改成功</div>
                     </c:if>
-                    <form action="" method="post" class="form-horizontal text-left" role="form">
-                        <div class="form-group ${maxshow!=null?'has-error':''}">
+                    <form action="backend/options/post" method="post" class="form-horizontal text-left" role="form">
+                        <div class="form-group ${form.maxshow==null?'has-error':''}">
                             <label class="col-sm-3" for="maxshow"><i>*</i>博客页面最多显示文章数</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="number" id="maxshow" name="maxshow"
                                        value="${form.maxshow}">
-                                <p class="help-block">${maxshow}</p>
+                                <p class="help-block">默认为10</p>
                             </div>
                         </div>
 
@@ -44,11 +44,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group ${defaultCategory!=null?'has-error':''}">
+                        <div class="form-group ${form.defaultCategory==null?'has-error':''}">
                             <label class="col-sm-3" for="defaultCategory"><i>*</i>默认文章分类目录</label>
                             <div class="col-sm-6">
                                 <select class="form-control" id="defaultCategory" name="defaultCategory">
-                                    <c:if test="${defautCategory==null}">
+                                    <c:if test="${form.defaultCategory==null}">
                                         <option>请选择</option>
                                     </c:if>
                                     <c:forEach var="category" items="${categorys}" begin="1">
@@ -65,7 +65,6 @@
                                 <button class="btn btn-primary btn-block" type="submit">保存更改</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

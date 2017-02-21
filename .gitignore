@@ -11,4 +11,4 @@ config
 description
 hooks/
 info/
-jdbc.properties
+*/jdbc.properties

@@ -23,7 +23,7 @@
                     <c:if test="${success}">
                         <div class="alert alert-success" style="padding: 10px 15px;">修改成功</div>
                     </c:if>
-                    <form action="" method="post" class="form-horizontal text-left" role="form">
+                    <form action="/backend/options/general" method="post" class="form-horizontal text-left" role="form">
                         <div class="form-group ${title!=null?'has-error':''}">
                             <label class="col-sm-3 col-md-3" for="title"><i>*</i>站点标题</label>
                             <div class="col-sm-6 col-md-7">
@@ -106,8 +106,6 @@
                                 <button type="submit" class="btn btn-primary btn-block">保存修改</button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>

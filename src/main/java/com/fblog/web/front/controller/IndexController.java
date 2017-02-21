@@ -1,6 +1,7 @@
 package com.fblog.web.front.controller;
 
 import com.fblog.biz.PostManager;
+import com.fblog.biz.VisitStateManager;
 import com.fblog.core.WebConstants;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.utils.StringUtils;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
     @Autowired
     private PostManager postManager;
+    @Autowired
+    private VisitStateManager visitStateManager;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -26,6 +29,7 @@ public class IndexController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(@RequestParam(value = "page", defaultValue = "1") int page, String word, Model model) {
+        visitStateManager.visitCount();
         if (StringUtils.isEmpty(word)) {
             model.addAttribute("page", postManager.listPost(page, PostConstants.MAX_POST_SHOW));
         } else {

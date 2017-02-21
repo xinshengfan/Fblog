@@ -47,6 +47,8 @@ public class Category extends BaseEntity {
             return "/resource/img/ios.svg";
         } else if ("web".equalsIgnoreCase(name)) {
             return "/resource/img/web.svg";
+        }else if ("server".equalsIgnoreCase(name)) {
+            return "/resource/img/server.svg";
         }
         return "/resource/img/note.svg";
     }

@@ -1,6 +1,7 @@
 package com.fblog.web.front.controller;
 
 import com.fblog.biz.PostManager;
+import com.fblog.biz.VisitStateManager;
 import com.fblog.core.WebConstants;
 import com.fblog.core.dao.constants.PostConstants;
 import com.fblog.core.dao.entity.Category;
@@ -20,11 +21,14 @@ public class CategoryFrontController {
     private CategoryService categoryService;
     @Autowired
     private PostManager postManager;
+    @Autowired
+    private VisitStateManager visitStateManager;
 
     @RequestMapping(value = "/{categoryname}", method = RequestMethod.GET)
     public String post(@PathVariable(value = "categoryname") String name,
                        @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         Category category = categoryService.loadByName(name);
+        visitStateManager.visitCount();
         if (category != null) {
             model.addAttribute(WebConstants.PRE_TITLE_KEY,name);
             model.addAttribute("page", postManager.listByCategory(category, page, PostConstants.MAX_POST_SHOW));

@@ -3,7 +3,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top"role="navigation">
     <div class="container-fluid" style="padding-right: 15px">
         <div class="navbar-header">
-            <a class="navbar-brand" target="_blank" href="${g.domain}">FBlog</a>
+            <a class="navbar-brand" target="_blank" href="${g.domain}">Xinping</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

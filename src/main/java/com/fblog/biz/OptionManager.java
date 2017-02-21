@@ -26,6 +26,7 @@ public class OptionManager {
         optionsService.updateOptionValue(OptionConstants.SUBTITLE, form.getSubtitle());
         optionsService.updateOptionValue(OptionConstants.DESCRIPTION, form.getDescription());
         optionsService.updateOptionValue(OptionConstants.KEYWORDS, form.getKeywords());
+        optionsService.updateOptionValue(OptionConstants.WEB_URL, form.getWeburl());
     }
 
     /**

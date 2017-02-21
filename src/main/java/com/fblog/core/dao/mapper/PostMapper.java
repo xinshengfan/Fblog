@@ -65,4 +65,6 @@ public interface PostMapper extends BaseMapper {
     List<String> listByTag(PageModel<String> model);
 
     void updateCategory(@Param("oldCategoryIds")List<String> oldCategoryIds,@Param("newCategoryId")String newCategoryId);
+
+    int getTotalRCount();
 }

@@ -24,15 +24,15 @@ public final class OptionConstants {
     /**
      * 前台每个页面最多显示数
      */
-    public static final String MAXSHOW = "post_maxshow";
+    public static final String MAXSHOW = "maxshow";
     /**
      * 文章默认分类ID
      */
-    public static final String DEFAULT_CATEGORY_ID = "post_defaultCategory";
+    public static final String DEFAULT_CATEGORY_ID = "defaultCategory";
     /**
      * 是否允许文章评论
      */
-    public static final String ALLOW_COMMENT = "post_allowComment";
+    public static final String ALLOW_COMMENT = "allowComment";
 
     /**
      * 文章ID生产机制
@@ -48,4 +48,6 @@ public final class OptionConstants {
     public static final String MAIL_USERNAMR = "mail_username";
 
     public static final String MAIL_PASSWORD = "mail_password";
+
+    public static final String VISIT_COUNT = "vcount";
 }

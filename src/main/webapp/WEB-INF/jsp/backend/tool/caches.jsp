@@ -49,6 +49,7 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <p><span>访问次数：<em>${vcount}</em></span></p>
                 </div>
             </div>
         </div>

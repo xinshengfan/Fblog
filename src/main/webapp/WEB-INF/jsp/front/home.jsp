@@ -3,12 +3,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="main-container">
-    <span id="post_title" hidden="hidden">FBlog${ptitle!=null?' | ':''}${ptitle}</span>
+    <span id="post_title" hidden="hidden">Xinping${ptitle!=null?' | ':''}${ptitle}</span>
     <c:if test="${page.content.size()==0}">
         <section class="blog-box-container">
             <div class="blog-concise-box">
                 <div class="blog-concise">
-                    <div class="ellipsis-text blog-content mui-ellipsis-3">
+                    <div class="ellipsis-text blog-content mui-ellipsis-3" style="line-height: 22">
                         <em style="color: gray">暂时没有内容</em>
                     </div>
                 </div>

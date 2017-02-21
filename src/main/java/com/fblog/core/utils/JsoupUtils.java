@@ -46,7 +46,13 @@ public class JsoupUtils {
      * 去掉所有标签，返回纯文字.适用于textarea，input
      */
     public static String plainText(String html) {
-        return Jsoup.parse(html).text();
+        //需要替换文本可能存在的HTML标签，需要将其<>替换
+        String text = Jsoup.parse(html).text();
+        if (!text.isEmpty()){
+            text = text.replaceAll("<","&lt;");
+            text = text.replaceAll(">","&gt;");
+        }
+        return text;
     }
 
     public static List<String> getImgesOrLinks(String html) {

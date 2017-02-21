@@ -15,7 +15,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="menus nav navbar-nav ">
-                <li><a class="navbar-brand" href="${g.domain}" style="margin-left: 20px">FBlog</a></li>
+                <li><a class="navbar-brand" href="${g.domain}" style="margin-left: 20px">Xinping</a></li>
                 <li><a onclick="fblog.front.replaceContent('/category/android')"><img class="icon-category"
                                                                                       src="/resource/img/android.svg"><span>Android</span></a>
                 </li>
@@ -25,6 +25,10 @@
                 <li><a onclick="fblog.front.replaceContent('/category/web')"><img class="icon-category"
                                                                                   src="/resource/img/web.svg"></i>
                     <span>Web</span></a>
+                </li>
+                <li><a onclick="fblog.front.replaceContent('/category/server')"><img class="icon-category"
+                                                                                   src="/resource/img/server.svg"></i>
+                    <span>Server</span></a>
                 </li>
                 <li><a onclick="fblog.front.replaceContent('/category/note')"><img class="icon-category"
                                                                                    src="/resource/img/note.svg"></i>

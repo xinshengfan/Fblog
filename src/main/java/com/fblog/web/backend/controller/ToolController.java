@@ -30,6 +30,7 @@ public class ToolController {
     public String ehcache(Model model){
         Collection<MapContainer> caches = enCacheManager.stats();
         model.addAttribute("caches", caches);
+        model.addAttribute("vcount",enCacheManager.getVisitCount());
         return "backend/tool/caches";
     }
 

@@ -126,5 +126,9 @@ public class PostService extends BaseService {
         postMapper.updateCategory(oldCategoryIds, newCategoryId);
     }
 
+    public int getTotalRCount(){
+        return postMapper.getTotalRCount();
+    }
+
 
 }

@@ -36,8 +36,9 @@
             title
         FROM post
         WHERE type = 'post' AND createTime &lt; (SELECT createTime
-                                              FROM post
-                                              WHERE id = #{postid})
+                                                 FROM post
+                                                 WHERE id = #{postid})
+        ORDER BY createTime DESC
         LIMIT 1
     </select>
     <!--Post getNextPost(String postid);-->
@@ -48,8 +49,8 @@
         FROM post
         WHERE type = 'post' AND createTime > (SELECT createTime
                                               FROM post
-                                              WHERE id = #{postid}
-                                              ORDER BY createTime DESC)
+                                              WHERE id = #{postid})
+        ORDER BY createTime ASC
         LIMIT 1
     </select>
     <!--PostVO loadById(String id);-->
@@ -126,5 +127,9 @@
             #{item}
         </foreach>
     </update>
+    <select id="getTotalRCount" resultType="int">
+        SELECT sum(rcount)
+        FROM post;
+    </select>
 
 </mapper>

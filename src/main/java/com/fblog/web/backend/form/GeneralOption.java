@@ -10,6 +10,15 @@ public class GeneralOption {
     private String description;
     private String keywords;
     private String weburl;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getTitle() {
         return title;

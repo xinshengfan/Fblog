@@ -9,7 +9,7 @@
 
     <div id="login">
         <form class="form-group" id="loginForm" method="post" role="form" action="/backend/login">
-            <h2>FBlog login</h2>
+            <h2>Xinping login</h2>
             <c:if test="${msg!=null}"><p class="message">${msg}<br></p></c:if>
             <div class="form-group">
                 <div class="input-group">

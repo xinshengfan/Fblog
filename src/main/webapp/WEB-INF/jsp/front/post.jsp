@@ -2,7 +2,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="main-container">
-    <span id="post_title" hidden="hidden">FBlog${ptitle!=null?' | ':''}${ptitle}</span>
+    <span id="post_title" hidden="hidden">Xinping${ptitle!=null?' | ':''}${ptitle}</span>
     <section class="blog-box-container">
         <div class="blog-timeline-box">
             <div class="blog-timeline">

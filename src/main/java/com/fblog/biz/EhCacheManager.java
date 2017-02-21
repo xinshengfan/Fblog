@@ -1,6 +1,9 @@
 package com.fblog.biz;
 
+import com.fblog.core.dao.constants.OptionConstants;
 import com.fblog.core.dao.entity.MapContainer;
+import com.fblog.service.OptionsService;
+import com.fblog.service.PostService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Statistics;
@@ -16,6 +19,10 @@ import java.util.List;
 public class EhCacheManager {
     @Autowired
     private EhCacheCacheManager manager;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private OptionsService optionsService;
 
     /**
      * 获取缓存数据分析
@@ -37,11 +44,16 @@ public class EhCacheManager {
             if (cache.isStatisticsEnabled()) {
                 temp.put("hitRatio", (float) gateway.getCacheHits() / (gateway.getCacheHits() + gateway.getCacheMisses()));
             }
-
             list.add(temp);
         }
 
         return list;
+    }
+
+    public int getVisitCount() {
+        String vcount = optionsService.getOptionValue(OptionConstants.VISIT_COUNT);
+        int postTotalCount = postService.getTotalRCount();
+        return Integer.parseInt(vcount)+postTotalCount;
     }
 
     public void clear(String cacheName) {

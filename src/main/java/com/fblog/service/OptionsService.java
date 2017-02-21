@@ -17,7 +17,7 @@ public class OptionsService extends BaseService {
         return optionsMapper;
     }
 
-    public String getOptionValue(String name){
+    public String getOptionValue(String name) {
         return optionsMapper.getOptionValue(name);
     }
 
@@ -27,17 +27,17 @@ public class OptionsService extends BaseService {
      * @param name
      * @return
      */
-    public String getOptionValueForUpdate(String name){
+    public String getOptionValueForUpdate(String name) {
         return optionsMapper.getOptionValueForUpdate(name);
     }
 
     /**
      * 此处为MySQL的replace into, 注意这需要主键id一致
      *
-     * @param name
-     * @param value
+     * @param name  .
+     * @param value .
      */
-    public void updateOptionValue(String name, String value){
+    public void updateOptionValue(String name, String value) {
         Option option = new Option(name, value);
         option.setId(name);
         optionsMapper.update(option);
